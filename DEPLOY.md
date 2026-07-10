@@ -171,6 +171,7 @@ docker compose -f docker-compose.prod.yml pull   # упадёт, если обр
 | `SERVER_USER` | пользователь для SSH-деплоя |
 | `SSH_PRIVATE_KEY` | приватный ключ из шага 2.3 |
 | `APP_URL` | `https://YOUR_DOMAIN` (для health-check) |
+| `GHCR_PAT` | Personal Access Token (classic) со scope `read:packages` |
 
 Плюс создать GitHub Environment `production` (`Settings → Environments`) — на него
 ссылается job `deploy` в workflow; можно оставить без доп. правил, либо повесить
@@ -178,15 +179,16 @@ required reviewers, если хочешь ручное подтверждени�
 
 ### Видимость образов в GHCR
 
-По умолчанию пакеты в GHCR для приватного репо создаются приватными — сервер не
-сможет их `pull` без авторизации. Проще всего после первого пуска:
+Репозиторий приватный, поэтому пакеты в GHCR тоже создаются приватными — сервер не
+сможет их `pull` без авторизации. Вместо того чтобы делать образы публичными,
+workflow логинится на сервере через `docker login ghcr.io` PAT-токеном
+(`GHCR_PAT`) перед каждым `pull` (см. job `deploy` в `deploy.yml`).
 
-`GitHub → твой профиль → Packages → fastlearn-backend / fastlearn-fastapi /
-fastlearn-frontend → Package settings → Change visibility → Public`.
-
-(Это публикует только Docker-образы, не исходный код репозитория.) Если публиковать
-образы публично не хочется — дай знать, добавлю в workflow шаг с `docker login` на
-сервере по PAT-токену с правом `read:packages`.
+Как создать токен: `github.com/settings/tokens` → **Tokens (classic)** →
+**Generate new token (classic)** → отметить только scope `read:packages` →
+сгенерировать и сразу скопировать значение → добавить как секрет `GHCR_PAT`
+в репозитории (см. таблицу выше). Токен привязан к сроку действия, который ты
+укажешь при создании — по истечении нужно перевыпустить и обновить секрет.
 
 ---
 
