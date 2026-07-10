@@ -1,0 +1,82 @@
+version: '3.8'
+
+# Продовый compose для сервера. В отличие от docker-compose.yml (локальная разработка):
+#  - образы берутся уже собранными из GHCR (их пушит GitHub Actions), а не собираются на месте;
+#  - postgres/redis/backend/fastapi не публикуют порты наружу — доступны только внутри docker-сети;
+#  - frontend слушает только 127.0.0.1, наружу его отдаёт хостовый nginx по HTTPS.
+#
+# Использование на сервере:
+#   IMAGE_TAG=<git-sha или latest> docker compose -f docker-compose.prod.yml pull
+#   IMAGE_TAG=<git-sha или latest> docker compose -f docker-compose.prod.yml up -d
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: ghcr.io/zhanibektau/fastlearn-backend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    volumes:
+      - uploads:/uploads/video
+    environment:
+      PORT: 8080
+      UPLOADS_DIR: /uploads/video
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_SSL_MODE: disable
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      FASTAPI_URL: http://fastapi:8001
+      FRONTEND_URL: ${FRONTEND_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  fastapi:
+    image: ghcr.io/zhanibektau/fastlearn-fastapi:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    volumes:
+      - uploads:/uploads/video
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GCS_BUCKET: ${GCS_BUCKET}
+
+  frontend:
+    image: ghcr.io/zhanibektau/fastlearn-frontend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  uploads:

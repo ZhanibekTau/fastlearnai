@@ -1,0 +1,115 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "processing": "Processing...",
+    "back": "Back",
+    "prev": "Prev",
+    "next": "Next",
+    "unlimited": "Unlimited",
+    "plan": "Plan",
+    "status": "Status",
+    "email": "Email",
+    "name": "Name",
+    "password": "Password",
+    "logout": "Logout",
+    "login": "Login",
+    "signUp": "Sign up"
+  },
+  "header": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "dashboard": "Dashboard"
+  },
+  "home": {
+    "titleLine1": "Turn Videos into",
+    "titleLine2": "Structured Notes",
+    "subtitle": "Upload any educational video or paste a YouTube link. Get a full summary in 5–10 minutes. Supports EN / RU / KK.",
+    "featureFastTitle": "Fast",
+    "featureFastDesc": "Results in 5-10 min",
+    "featureMultiTitle": "Multilingual",
+    "featureMultiDesc": "EN / RU / KK",
+    "featureExportTitle": "Export",
+    "featureExportDesc": "PDF, Markdown, HTML"
+  },
+  "upload": {
+    "dropZone": "Drag & drop your video here",
+    "formats": "MP4, MOV, WebM up to 500MB · or MP3, M4A up to 200MB",
+    "chooseFile": "Choose file",
+    "orYoutube": "or paste YouTube URL",
+    "languageLabel": "Language:",
+    "autoDetect": "Auto-detect",
+    "selected": "Selected: {name} ({size})",
+    "uploading": "Uploading...",
+    "generateSummary": "Generate Summary",
+    "toastChooseFileOrUrl": "Choose a file or enter a YouTube URL",
+    "toastUploaded": "Video uploaded — generating summary...",
+    "toastLimitReached": "Monthly limit reached. Write to @fastlearn_support on Telegram to upgrade.",
+    "toastLoginRequired": "Please log in to upload videos.",
+    "toastUploadFailed": "Upload failed. Please try again."
+  },
+  "videoList": {
+    "empty": "No videos yet. Upload your first one!",
+    "untitled": "Untitled",
+    "status": {
+      "completed": "Completed",
+      "processing": "Processing",
+      "failed": "Failed",
+      "pending": "Pending"
+    }
+  },
+  "summary": {
+    "keyPoints": "Key Points",
+    "keyTakeaways": "Key Takeaways",
+    "qa": "Q&A",
+    "questionPrefix": "Q:",
+    "answerPrefix": "A:",
+    "downloadPdf": "Download PDF",
+    "downloadMarkdown": "Download Markdown",
+    "copyLink": "Copy Public Link"
+  },
+  "login": {
+    "createAccount": "Create Account",
+    "welcomeBack": "Welcome back",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@example.com",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "toastAccountCreated": "Account created! Welcome to FastLearn.",
+    "toastServerError": "Server error — please try again later.",
+    "errorGeneric": "Something went wrong"
+  },
+  "pricing": {
+    "title": "Simple Pricing",
+    "subtitle": "Start free, upgrade when you need more",
+    "mostPopular": "Most Popular",
+    "free": "Free",
+    "perMonth": "/mo",
+    "videosPerMonth": "videos/month",
+    "maxDuration": "max duration",
+    "get": "Get {name}",
+    "getStarted": "Get Started",
+    "footnote": "Payments processed via Telegram for MVP. Stripe integration coming soon."
+  },
+  "dashboard": {
+    "myVideos": "My Videos",
+    "newVideo": "+ New Video",
+    "videosThisMonth": "Videos this month:",
+    "upgrade": "Upgrade",
+    "loadingVideos": "Loading videos...",
+    "confirmDelete": "Delete this video?"
+  },
+  "account": {
+    "title": "Account",
+    "profile": "Profile",
+    "subscription": "Subscription",
+    "renews": "Renews:",
+    "upgradeViaTelegram": "Upgrade via Telegram",
+    "usageThisMonth": "Usage This Month",
+    "videos": "Videos"
+  },
+  "videoDetail": {
+    "processingMessage": "Processing video... This may take a few minutes.",
+    "processingFailed": "Processing failed",
+    "retry": "Retry"
+  }
+}

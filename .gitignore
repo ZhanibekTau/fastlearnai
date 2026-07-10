@@ -1,0 +1,31 @@
+# Env / secrets
+.env
+.env.*
+!.env.example
+service-account.json
+*.pem
+*.key
+
+# Go
+backend/fastlearn-api
+backend/*.exe
+
+# Python
+fastapi/__pycache__/
+fastapi/**/__pycache__/
+fastapi/*.pyc
+fastapi/.venv/
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+
+# Uploads / runtime data
+uploads/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store

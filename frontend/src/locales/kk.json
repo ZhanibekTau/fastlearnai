@@ -1,0 +1,115 @@
+{
+  "common": {
+    "loading": "Жүктелуде...",
+    "processing": "Өңделуде...",
+    "back": "Артқа",
+    "prev": "Алдыңғы",
+    "next": "Келесі",
+    "unlimited": "Шексіз",
+    "plan": "Тариф",
+    "status": "Күйі",
+    "email": "Email",
+    "name": "Аты",
+    "password": "Құпия сөз",
+    "logout": "Шығу",
+    "login": "Кіру",
+    "signUp": "Тіркелу"
+  },
+  "header": {
+    "home": "Басты бет",
+    "pricing": "Тарифтер",
+    "dashboard": "Тақта"
+  },
+  "home": {
+    "titleLine1": "Бейнелерді",
+    "titleLine2": "құрылымды конспектіге айналдырыңыз",
+    "subtitle": "Кез келген оқу бейнесін жүктеңіз немесе YouTube сілтемесін қойыңыз. 5–10 минутта толық конспект алыңыз. EN / RU / KK тілдеріне қолдау көрсетіледі.",
+    "featureFastTitle": "Жылдам",
+    "featureFastDesc": "Нәтиже 5-10 минутта",
+    "featureMultiTitle": "Көптілді",
+    "featureMultiDesc": "EN / RU / KK",
+    "featureExportTitle": "Экспорт",
+    "featureExportDesc": "PDF, Markdown, HTML"
+  },
+  "upload": {
+    "dropZone": "Бейнеңізді осы жерге сүйреп апарыңыз",
+    "formats": "MP4, MOV, WebM 500МБ дейін · немесе MP3, M4A 200МБ дейін",
+    "chooseFile": "Файлды таңдау",
+    "orYoutube": "немесе YouTube сілтемесін қойыңыз",
+    "languageLabel": "Тіл:",
+    "autoDetect": "Автоанықтау",
+    "selected": "Таңдалды: {name} ({size})",
+    "uploading": "Жүктелуде...",
+    "generateSummary": "Конспект жасау",
+    "toastChooseFileOrUrl": "Файлды таңдаңыз немесе YouTube сілтемесін енгізіңіз",
+    "toastUploaded": "Бейне жүктелді — конспект жасалуда...",
+    "toastLimitReached": "Айлық лимитке жеттіңіз. Тарифті көтеру үшін Telegram-да @fastlearn_support жазыңыз.",
+    "toastLoginRequired": "Бейне жүктеу үшін жүйеге кіріңіз.",
+    "toastUploadFailed": "Жүктеу сәтсіз аяқталды. Қайталап көріңіз."
+  },
+  "videoList": {
+    "empty": "Әзірге бейне жоқ. Біріншісін жүктеңіз!",
+    "untitled": "Атаусыз",
+    "status": {
+      "completed": "Дайын",
+      "processing": "Өңделуде",
+      "failed": "Қате",
+      "pending": "Күтуде"
+    }
+  },
+  "summary": {
+    "keyPoints": "Негізгі тұстар",
+    "keyTakeaways": "Негізгі қорытындылар",
+    "qa": "Сұрақ-жауап",
+    "questionPrefix": "С:",
+    "answerPrefix": "Ж:",
+    "downloadPdf": "PDF жүктеу",
+    "downloadMarkdown": "Markdown жүктеу",
+    "copyLink": "Ашық сілтемені көшіру"
+  },
+  "login": {
+    "createAccount": "Аккаунт жасау",
+    "welcomeBack": "Қош келдіңіз",
+    "namePlaceholder": "Атыңыз",
+    "emailPlaceholder": "you@example.com",
+    "noAccount": "Аккаунтыңыз жоқ па?",
+    "haveAccount": "Аккаунтыңыз бар ма?",
+    "toastAccountCreated": "Аккаунт жасалды! FastLearn-ге қош келдіңіз.",
+    "toastServerError": "Сервер қатесі — кейінірек қайталап көріңіз.",
+    "errorGeneric": "Бірдеңе дұрыс болмады"
+  },
+  "pricing": {
+    "title": "Қарапайым тарифтер",
+    "subtitle": "Тегін бастаңыз, қажет болғанда тарифті жақсартыңыз",
+    "mostPopular": "Ең танымал",
+    "free": "Тегін",
+    "perMonth": "/ай",
+    "videosPerMonth": "бейне/ай",
+    "maxDuration": "макс. ұзақтығы",
+    "get": "{name} алу",
+    "getStarted": "Бастау",
+    "footnote": "MVP үшін төлемдер Telegram арқылы өңделеді. Stripe интеграциясы жақында қосылады."
+  },
+  "dashboard": {
+    "myVideos": "Менің бейнелерім",
+    "newVideo": "+ Жаңа бейне",
+    "videosThisMonth": "Осы айдағы бейнелер:",
+    "upgrade": "Тарифті жақсарту",
+    "loadingVideos": "Бейнелер жүктелуде...",
+    "confirmDelete": "Бұл бейнені жоясыз ба?"
+  },
+  "account": {
+    "title": "Аккаунт",
+    "profile": "Профиль",
+    "subscription": "Жазылым",
+    "renews": "Жаңарту күні:",
+    "upgradeViaTelegram": "Telegram арқылы тарифті жақсарту",
+    "usageThisMonth": "Осы айдағы қолданыс",
+    "videos": "Бейнелер"
+  },
+  "videoDetail": {
+    "processingMessage": "Бейне өңделуде... Бұл бірнеше минутқа созылуы мүмкін.",
+    "processingFailed": "Өңдеу сәтсіз аяқталды",
+    "retry": "Қайталау"
+  }
+}

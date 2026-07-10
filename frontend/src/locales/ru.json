@@ -1,0 +1,115 @@
+{
+  "common": {
+    "loading": "Загрузка...",
+    "processing": "Обработка...",
+    "back": "Назад",
+    "prev": "Назад",
+    "next": "Далее",
+    "unlimited": "Без ограничений",
+    "plan": "Тариф",
+    "status": "Статус",
+    "email": "Email",
+    "name": "Имя",
+    "password": "Пароль",
+    "logout": "Выйти",
+    "login": "Войти",
+    "signUp": "Регистрация"
+  },
+  "header": {
+    "home": "Главная",
+    "pricing": "Тарифы",
+    "dashboard": "Дашборд"
+  },
+  "home": {
+    "titleLine1": "Превращайте видео в",
+    "titleLine2": "структурированные конспекты",
+    "subtitle": "Загрузите обучающее видео или вставьте ссылку на YouTube. Получите полный конспект за 5–10 минут. Поддерживаются EN / RU / KK.",
+    "featureFastTitle": "Быстро",
+    "featureFastDesc": "Результат за 5-10 мин",
+    "featureMultiTitle": "Многоязычность",
+    "featureMultiDesc": "EN / RU / KK",
+    "featureExportTitle": "Экспорт",
+    "featureExportDesc": "PDF, Markdown, HTML"
+  },
+  "upload": {
+    "dropZone": "Перетащите видео сюда",
+    "formats": "MP4, MOV, WebM до 500МБ · или MP3, M4A до 200МБ",
+    "chooseFile": "Выбрать файл",
+    "orYoutube": "или вставьте ссылку на YouTube",
+    "languageLabel": "Язык:",
+    "autoDetect": "Автоопределение",
+    "selected": "Выбрано: {name} ({size})",
+    "uploading": "Загрузка...",
+    "generateSummary": "Создать конспект",
+    "toastChooseFileOrUrl": "Выберите файл или введите ссылку на YouTube",
+    "toastUploaded": "Видео загружено — создаём конспект...",
+    "toastLimitReached": "Достигнут месячный лимит. Напишите @fastlearn_support в Telegram, чтобы повысить тариф.",
+    "toastLoginRequired": "Войдите, чтобы загружать видео.",
+    "toastUploadFailed": "Не удалось загрузить видео. Попробуйте ещё раз."
+  },
+  "videoList": {
+    "empty": "Пока нет видео. Загрузите первое!",
+    "untitled": "Без названия",
+    "status": {
+      "completed": "Готово",
+      "processing": "Обрабатывается",
+      "failed": "Ошибка",
+      "pending": "В ожидании"
+    }
+  },
+  "summary": {
+    "keyPoints": "Ключевые моменты",
+    "keyTakeaways": "Главные выводы",
+    "qa": "Вопросы и ответы",
+    "questionPrefix": "В:",
+    "answerPrefix": "О:",
+    "downloadPdf": "Скачать PDF",
+    "downloadMarkdown": "Скачать Markdown",
+    "copyLink": "Скопировать публичную ссылку"
+  },
+  "login": {
+    "createAccount": "Создать аккаунт",
+    "welcomeBack": "С возвращением",
+    "namePlaceholder": "Ваше имя",
+    "emailPlaceholder": "you@example.com",
+    "noAccount": "Нет аккаунта?",
+    "haveAccount": "Уже есть аккаунт?",
+    "toastAccountCreated": "Аккаунт создан! Добро пожаловать в FastLearn.",
+    "toastServerError": "Ошибка сервера — попробуйте позже.",
+    "errorGeneric": "Что-то пошло не так"
+  },
+  "pricing": {
+    "title": "Простые тарифы",
+    "subtitle": "Начните бесплатно, улучшите тариф при необходимости",
+    "mostPopular": "Популярный выбор",
+    "free": "Бесплатно",
+    "perMonth": "/мес",
+    "videosPerMonth": "видео в месяц",
+    "maxDuration": "макс. длительность",
+    "get": "Выбрать {name}",
+    "getStarted": "Начать",
+    "footnote": "Оплата через Telegram для MVP. Интеграция со Stripe скоро."
+  },
+  "dashboard": {
+    "myVideos": "Мои видео",
+    "newVideo": "+ Новое видео",
+    "videosThisMonth": "Видео в этом месяце:",
+    "upgrade": "Улучшить тариф",
+    "loadingVideos": "Загрузка видео...",
+    "confirmDelete": "Удалить это видео?"
+  },
+  "account": {
+    "title": "Аккаунт",
+    "profile": "Профиль",
+    "subscription": "Подписка",
+    "renews": "Продление:",
+    "upgradeViaTelegram": "Улучшить тариф через Telegram",
+    "usageThisMonth": "Использование за месяц",
+    "videos": "Видео"
+  },
+  "videoDetail": {
+    "processingMessage": "Обработка видео... Это может занять несколько минут.",
+    "processingFailed": "Обработка не удалась",
+    "retry": "Повторить"
+  }
+}
