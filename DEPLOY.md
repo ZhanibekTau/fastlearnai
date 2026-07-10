@@ -203,3 +203,5 @@ fastlearn-frontend → Package settings → Change visibility → Public`.
 
 `.env` с секретами при этом не трогается — он один раз создан вручную на сервере
 (шаг 2.2) и остаётся там постоянно.
+
+test
