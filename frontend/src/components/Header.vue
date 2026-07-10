@@ -7,6 +7,7 @@
         <RouterLink to="/" class="text-sm hover:text-primary-600 transition-colors">{{ t('header.home') }}</RouterLink>
         <RouterLink to="/pricing" class="text-sm hover:text-primary-600 transition-colors">{{ t('header.pricing') }}</RouterLink>
         <RouterLink v-if="auth.isLoggedIn" to="/dashboard" class="text-sm hover:text-primary-600 transition-colors">{{ t('header.dashboard') }}</RouterLink>
+        <RouterLink v-if="auth.isAdmin" to="/admin" class="text-sm hover:text-primary-600 transition-colors">{{ t('header.admin') }}</RouterLink>
       </nav>
 
       <div class="flex items-center gap-3">

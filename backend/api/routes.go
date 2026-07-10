@@ -14,6 +14,7 @@ func NewRouter(
 	authH *handlers.AuthHandler,
 	videoH *handlers.VideoHandler,
 	subH *handlers.SubscriptionHandler,
+	adminH *handlers.AdminHandler,
 	cfg *config.Config,
 ) *echo.Echo {
 	e := echo.New()
@@ -70,6 +71,11 @@ func NewRouter(
 	p.GET("/subscriptions/me", subH.Mine)
 	p.GET("/subscriptions/usage", subH.Usage)
 	p.GET("/subscriptions/upgrade", subH.Upgrade)
+
+	// ── Admin (manual plan grants, gated by ADMIN_EMAILS) ─────────
+	admin := v1.Group("/admin", mw.JWTAuth(cfg), mw.AdminOnly(cfg))
+	admin.GET("/users", adminH.SearchUsers)
+	admin.POST("/users/:id/subscription", adminH.GrantSubscription)
 
 	return e
 }

@@ -20,8 +20,8 @@
           <span class="ml-2">{{ new Date(sub.current_period_end).toLocaleDateString(locale) }}</span>
         </div>
       </div>
-      <a href="https://t.me/fastlearn_support" target="_blank" class="btn-primary mt-4 inline-block text-sm">
-        {{ t('account.upgradeViaTelegram') }}
+      <a href="https://wa.me/77479255091" target="_blank" class="btn-primary mt-4 inline-block text-sm">
+        {{ t('account.upgradeViaWhatsapp') }}
       </a>
     </div>
 

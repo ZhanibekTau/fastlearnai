@@ -63,16 +63,17 @@ func main() {
 	subSvc := services.NewSubscriptionService(subRepo, cfg)
 
 	// ── Handlers ──────────────────────────────────────────────────
-	authH := handlers.NewAuthHandler(authSvc)
+	authH := handlers.NewAuthHandler(authSvc, cfg)
 	videoH := handlers.NewVideoHandler(videoSvc)
 	subH := handlers.NewSubscriptionHandler(subSvc)
+	adminH := handlers.NewAdminHandler(authSvc, subSvc)
 
 	// ── Background worker ─────────────────────────────────────────
 	processor := queue.NewProcessor(videoRepo, summaryRepo, procRepo, rdb, cfg)
 	go processor.Start()
 
 	// ── HTTP Server ───────────────────────────────────────────────
-	e := api.NewRouter(authH, videoH, subH, cfg)
+	e := api.NewRouter(authH, videoH, subH, adminH, cfg)
 
 	go func() {
 		slog.Info("server starting", "port", cfg.Port)

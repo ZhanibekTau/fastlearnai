@@ -18,7 +18,8 @@
   "header": {
     "home": "Басты бет",
     "pricing": "Тарифтер",
-    "dashboard": "Тақта"
+    "dashboard": "Тақта",
+    "admin": "Админ"
   },
   "home": {
     "titleLine1": "Бейнелерді",
@@ -43,7 +44,7 @@
     "generateSummary": "Конспект жасау",
     "toastChooseFileOrUrl": "Файлды таңдаңыз немесе YouTube сілтемесін енгізіңіз",
     "toastUploaded": "Бейне жүктелді — конспект жасалуда...",
-    "toastLimitReached": "Айлық лимитке жеттіңіз. Тарифті көтеру үшін Telegram-да @fastlearn_support жазыңыз.",
+    "toastLimitReached": "Айлық лимитке жеттіңіз. Тарифті көтеру үшін WhatsApp-қа (+7 747 925 50 91) жазыңыз.",
     "toastLoginRequired": "Бейне жүктеу үшін жүйеге кіріңіз.",
     "toastUploadFailed": "Жүктеу сәтсіз аяқталды. Қайталап көріңіз."
   },
@@ -71,7 +72,7 @@
     "createAccount": "Аккаунт жасау",
     "welcomeBack": "Қош келдіңіз",
     "namePlaceholder": "Атыңыз",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "you{'@'}example.com",
     "noAccount": "Аккаунтыңыз жоқ па?",
     "haveAccount": "Аккаунтыңыз бар ма?",
     "toastAccountCreated": "Аккаунт жасалды! FastLearn-ге қош келдіңіз.",
@@ -88,7 +89,7 @@
     "maxDuration": "макс. ұзақтығы",
     "get": "{name} алу",
     "getStarted": "Бастау",
-    "footnote": "MVP үшін төлемдер Telegram арқылы өңделеді. Stripe интеграциясы жақында қосылады."
+    "footnote": "MVP үшін төлемдер WhatsApp арқылы өңделеді. Stripe интеграциясы жақында қосылады."
   },
   "dashboard": {
     "myVideos": "Менің бейнелерім",
@@ -103,7 +104,7 @@
     "profile": "Профиль",
     "subscription": "Жазылым",
     "renews": "Жаңарту күні:",
-    "upgradeViaTelegram": "Telegram арқылы тарифті жақсарту",
+    "upgradeViaWhatsapp": "WhatsApp арқылы тарифті жақсарту",
     "usageThisMonth": "Осы айдағы қолданыс",
     "videos": "Бейнелер"
   },
@@ -111,5 +112,18 @@
     "processingMessage": "Бейне өңделуде... Бұл бірнеше минутқа созылуы мүмкін.",
     "processingFailed": "Өңдеу сәтсіз аяқталды",
     "retry": "Қайталау"
+  },
+  "admin": {
+    "title": "Админ-панель",
+    "searchPlaceholder": "Email бойынша іздеу",
+    "searchButton": "Іздеу",
+    "noResults": "Пайдаланушылар табылмады",
+    "accessDenied": "Бұл бетке қатынасыңыз жоқ",
+    "currentPlan": "Ағымдағы тариф",
+    "expiresOn": "Аяқталады",
+    "noExpiry": "Белсенді кезең жоқ",
+    "months": "Ай саны",
+    "grant": "Беру / ұзарту",
+    "grantSuccess": "{email} үшін тариф жаңартылды"
   }
 }

@@ -96,6 +96,11 @@ func (s *AuthService) Me(ctx context.Context, userID string) (*models.User, erro
 	return s.users.FindByID(ctx, userID)
 }
 
+// SearchUsers does a case-insensitive partial email match, for admin lookup.
+func (s *AuthService) SearchUsers(ctx context.Context, emailQuery string) ([]models.User, error) {
+	return s.users.SearchByEmail(ctx, emailQuery)
+}
+
 func (s *AuthService) buildTokenResponse(user *models.User) (*models.AuthResponse, error) {
 	access, refresh, err := utils.GenerateTokenPair(user.ID, user.Email, s.cfg.JWTSecret)
 	if err != nil {

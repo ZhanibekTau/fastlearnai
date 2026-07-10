@@ -2,13 +2,17 @@ package services
 
 import (
 	"context"
+	"errors"
 	"net/http"
+	"time"
 
 	"github.com/fastlearn/backend/config"
 	"github.com/fastlearn/backend/models"
 	"github.com/fastlearn/backend/repository"
 	"github.com/stripe/stripe-go/v76/webhook"
 )
+
+var ErrInvalidPlan = errors.New("invalid plan")
 
 type SubscriptionService struct {
 	subs repository.SubscriptionRepository
@@ -47,6 +51,35 @@ func (s *SubscriptionService) GetUsage(ctx context.Context, userID string) (map[
 			"has_qa":            limits.HasQA,
 		},
 	}, nil
+}
+
+// AdminGrantPlan manually sets a user's plan, e.g. after an admin receives a WhatsApp payment.
+// If the user already has the same plan active and not yet expired, the extension is added
+// on top of the remaining time instead of overwriting it.
+func (s *SubscriptionService) AdminGrantPlan(ctx context.Context, userID string, plan models.Plan, months int) (*models.Subscription, error) {
+	if _, ok := models.PlanConfig[plan]; !ok {
+		return nil, ErrInvalidPlan
+	}
+
+	now := time.Now()
+
+	if plan == models.PlanFree {
+		return s.subs.AdminSetPlan(ctx, userID, plan, &now, nil)
+	}
+
+	if months < 1 {
+		months = 1
+	}
+
+	base := now
+	current, err := s.subs.FindByUserID(ctx, userID)
+	if err == nil && current.Plan == plan && current.Status == "active" &&
+		current.CurrentPeriodEnd != nil && current.CurrentPeriodEnd.After(now) {
+		base = *current.CurrentPeriodEnd
+	}
+
+	periodEnd := base.AddDate(0, months, 0)
+	return s.subs.AdminSetPlan(ctx, userID, plan, &now, &periodEnd)
 }
 
 func (s *SubscriptionService) HandleStripeWebhook(r *http.Request) error {

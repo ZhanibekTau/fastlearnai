@@ -17,6 +17,7 @@ type SubscriptionRepository interface {
 	GetPlanByUserID(ctx context.Context, userID string) (models.Plan, error)
 	GetUsage(ctx context.Context, userID, month string) (*models.Usage, error)
 	IncrementUsage(ctx context.Context, userID, month string) error
+	AdminSetPlan(ctx context.Context, userID string, plan models.Plan, periodStart, periodEnd *time.Time) (*models.Subscription, error)
 }
 
 type pgSubscriptionRepo struct{ db *pgxpool.Pool }
@@ -46,6 +47,24 @@ func (r *pgSubscriptionRepo) CreateDefault(ctx context.Context, userID string) e
 		uuid.New().String(), userID,
 	)
 	return err
+}
+
+// AdminSetPlan upserts the user's subscription to the given plan/period, for manual grants by an admin.
+func (r *pgSubscriptionRepo) AdminSetPlan(ctx context.Context, userID string, plan models.Plan, periodStart, periodEnd *time.Time) (*models.Subscription, error) {
+	var s models.Subscription
+	err := r.db.QueryRow(ctx,
+		`INSERT INTO subscriptions (id, user_id, plan, status, current_period_start, current_period_end)
+		 VALUES ($1,$2,$3,'active',$4,$5)
+		 ON CONFLICT (user_id) DO UPDATE
+		   SET plan=$3, status='active', current_period_start=$4, current_period_end=$5
+		 RETURNING id, user_id, plan, stripe_subscription_id, status, current_period_start, current_period_end, created_at`,
+		uuid.New().String(), userID, string(plan), periodStart, periodEnd,
+	).Scan(&s.ID, &s.UserID, &s.Plan, &s.StripeSubscriptionID, &s.Status,
+		&s.CurrentPeriodStart, &s.CurrentPeriodEnd, &s.CreatedAt)
+	if err != nil {
+		return nil, err
+	}
+	return &s, nil
 }
 
 func (r *pgSubscriptionRepo) GetPlanByUserID(ctx context.Context, userID string) (models.Plan, error) {

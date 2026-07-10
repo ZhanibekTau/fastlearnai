@@ -44,8 +44,8 @@ func (h *VideoHandler) Upload(c echo.Context) error {
 			return c.JSON(http.StatusPaymentRequired, map[string]any{
 				"message": "Monthly limit reached",
 				"upgrade": map[string]string{
-					"type": "telegram",
-					"url":  "https://t.me/fastlearn_support",
+					"type": "whatsapp",
+					"url":  "https://wa.me/77479255091",
 				},
 			})
 		}

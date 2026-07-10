@@ -18,7 +18,8 @@
   "header": {
     "home": "Главная",
     "pricing": "Тарифы",
-    "dashboard": "Дашборд"
+    "dashboard": "Дашборд",
+    "admin": "Админ"
   },
   "home": {
     "titleLine1": "Превращайте видео в",
@@ -43,7 +44,7 @@
     "generateSummary": "Создать конспект",
     "toastChooseFileOrUrl": "Выберите файл или введите ссылку на YouTube",
     "toastUploaded": "Видео загружено — создаём конспект...",
-    "toastLimitReached": "Достигнут месячный лимит. Напишите @fastlearn_support в Telegram, чтобы повысить тариф.",
+    "toastLimitReached": "Достигнут месячный лимит. Напишите нам в WhatsApp (+7 747 925 50 91), чтобы повысить тариф.",
     "toastLoginRequired": "Войдите, чтобы загружать видео.",
     "toastUploadFailed": "Не удалось загрузить видео. Попробуйте ещё раз."
   },
@@ -71,7 +72,7 @@
     "createAccount": "Создать аккаунт",
     "welcomeBack": "С возвращением",
     "namePlaceholder": "Ваше имя",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "you{'@'}example.com",
     "noAccount": "Нет аккаунта?",
     "haveAccount": "Уже есть аккаунт?",
     "toastAccountCreated": "Аккаунт создан! Добро пожаловать в FastLearn.",
@@ -88,7 +89,7 @@
     "maxDuration": "макс. длительность",
     "get": "Выбрать {name}",
     "getStarted": "Начать",
-    "footnote": "Оплата через Telegram для MVP. Интеграция со Stripe скоро."
+    "footnote": "Оплата через WhatsApp для MVP. Интеграция со Stripe скоро."
   },
   "dashboard": {
     "myVideos": "Мои видео",
@@ -103,7 +104,7 @@
     "profile": "Профиль",
     "subscription": "Подписка",
     "renews": "Продление:",
-    "upgradeViaTelegram": "Улучшить тариф через Telegram",
+    "upgradeViaWhatsapp": "Улучшить тариф через WhatsApp",
     "usageThisMonth": "Использование за месяц",
     "videos": "Видео"
   },
@@ -111,5 +112,18 @@
     "processingMessage": "Обработка видео... Это может занять несколько минут.",
     "processingFailed": "Обработка не удалась",
     "retry": "Повторить"
+  },
+  "admin": {
+    "title": "Админ-панель",
+    "searchPlaceholder": "Поиск по email",
+    "searchButton": "Найти",
+    "noResults": "Пользователи не найдены",
+    "accessDenied": "У вас нет доступа к этой странице",
+    "currentPlan": "Текущий тариф",
+    "expiresOn": "Истекает",
+    "noExpiry": "Нет активного периода",
+    "months": "Месяцев",
+    "grant": "Выдать / продлить",
+    "grantSuccess": "Тариф обновлён для {email}"
   }
 }

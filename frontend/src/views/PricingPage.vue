@@ -14,7 +14,7 @@
         <h2 class="text-xl font-bold mb-1">{{ plan.name }}</h2>
         <div class="text-3xl font-bold mb-4">
           <span v-if="plan.price === 0">{{ t('pricing.free') }}</span>
-          <span v-else>${{ (plan.price / 100).toFixed(2) }}<span class="text-base font-normal text-gray-400">{{ t('pricing.perMonth') }}</span></span>
+          <span v-else>{{ plan.price.toLocaleString('ru-RU') }} ₸<span class="text-base font-normal text-gray-400">{{ t('pricing.perMonth') }}</span></span>
         </div>
 
         <ul class="space-y-2 text-sm flex-1 mb-6">
@@ -34,7 +34,7 @@
 
         <a
           v-if="plan.id !== 'free'"
-          href="https://t.me/fastlearn_support"
+          href="https://wa.me/77479255091"
           target="_blank"
           class="btn-primary text-center"
         >

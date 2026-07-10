@@ -26,6 +26,7 @@ type UserRepository interface {
 	FindByEmail(ctx context.Context, email string) (*models.User, error)
 	FindByID(ctx context.Context, id string) (*models.User, error)
 	Create(ctx context.Context, input CreateUserInput) (*models.User, error)
+	SearchByEmail(ctx context.Context, query string) ([]models.User, error)
 }
 
 type pgUserRepo struct{ db *pgxpool.Pool }
@@ -64,6 +65,29 @@ func (r *pgUserRepo) FindByID(ctx context.Context, id string) (*models.User, err
 		return nil, ErrNotFound
 	}
 	return &u, err
+}
+
+// SearchByEmail does a case-insensitive partial match, for admin lookup.
+func (r *pgUserRepo) SearchByEmail(ctx context.Context, query string) ([]models.User, error) {
+	rows, err := r.db.Query(ctx,
+		`SELECT id, email, name, oauth_provider, created_at, updated_at
+		 FROM users WHERE email ILIKE $1 ORDER BY created_at DESC LIMIT 20`,
+		"%"+query+"%",
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var users []models.User
+	for rows.Next() {
+		var u models.User
+		if err := rows.Scan(&u.ID, &u.Email, &u.Name, &u.OAuthProvider, &u.CreatedAt, &u.UpdatedAt); err != nil {
+			return nil, err
+		}
+		users = append(users, u)
+	}
+	return users, rows.Err()
 }
 
 func (r *pgUserRepo) Create(ctx context.Context, input CreateUserInput) (*models.User, error) {

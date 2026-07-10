@@ -25,6 +25,12 @@ const routes = [
     meta: { requiresAuth: true },
   },
   { path: '/public/:id', component: () => import('@/views/VideoDetailPage.vue'), name: 'public-video' },
+  {
+    path: '/admin',
+    component: () => import('@/views/AdminPage.vue'),
+    name: 'admin',
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = createRouter({

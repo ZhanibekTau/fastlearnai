@@ -18,7 +18,8 @@
   "header": {
     "home": "Home",
     "pricing": "Pricing",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "admin": "Admin"
   },
   "home": {
     "titleLine1": "Turn Videos into",
@@ -43,7 +44,7 @@
     "generateSummary": "Generate Summary",
     "toastChooseFileOrUrl": "Choose a file or enter a YouTube URL",
     "toastUploaded": "Video uploaded — generating summary...",
-    "toastLimitReached": "Monthly limit reached. Write to @fastlearn_support on Telegram to upgrade.",
+    "toastLimitReached": "Monthly limit reached. Message us on WhatsApp (+7 747 925 50 91) to upgrade.",
     "toastLoginRequired": "Please log in to upload videos.",
     "toastUploadFailed": "Upload failed. Please try again."
   },
@@ -71,7 +72,7 @@
     "createAccount": "Create Account",
     "welcomeBack": "Welcome back",
     "namePlaceholder": "Your name",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "you{'@'}example.com",
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
     "toastAccountCreated": "Account created! Welcome to FastLearn.",
@@ -88,7 +89,7 @@
     "maxDuration": "max duration",
     "get": "Get {name}",
     "getStarted": "Get Started",
-    "footnote": "Payments processed via Telegram for MVP. Stripe integration coming soon."
+    "footnote": "Payments processed via WhatsApp for MVP. Stripe integration coming soon."
   },
   "dashboard": {
     "myVideos": "My Videos",
@@ -103,7 +104,7 @@
     "profile": "Profile",
     "subscription": "Subscription",
     "renews": "Renews:",
-    "upgradeViaTelegram": "Upgrade via Telegram",
+    "upgradeViaWhatsapp": "Upgrade via WhatsApp",
     "usageThisMonth": "Usage This Month",
     "videos": "Videos"
   },
@@ -111,5 +112,18 @@
     "processingMessage": "Processing video... This may take a few minutes.",
     "processingFailed": "Processing failed",
     "retry": "Retry"
+  },
+  "admin": {
+    "title": "Admin",
+    "searchPlaceholder": "Search by email",
+    "searchButton": "Search",
+    "noResults": "No users found",
+    "accessDenied": "You don't have access to this page",
+    "currentPlan": "Current plan",
+    "expiresOn": "Expires",
+    "noExpiry": "No active period",
+    "months": "Months",
+    "grant": "Grant / extend",
+    "grantSuccess": "Plan updated for {email}"
   }
 }

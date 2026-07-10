@@ -25,12 +25,12 @@ func (h *SubscriptionHandler) Plans(c echo.Context) error {
 			"features": []string{"HTML export", "7-day history"},
 		},
 		{
-			"id": "pro", "name": "Pro", "price": 299,
+			"id": "pro", "name": "Pro", "price": 1500,
 			"videos_month": 30, "max_duration_min": 180,
 			"features": []string{"PDF + Markdown", "Q&A generation", "30-day history"},
 		},
 		{
-			"id": "premium", "name": "Premium", "price": 799,
+			"id": "premium", "name": "Premium", "price": 3900,
 			"videos_month": -1, "max_duration_min": -1,
 			"features": []string{"Unlimited", "API access", "JSON export", "Lifetime history"},
 		},
@@ -60,13 +60,13 @@ func (h *SubscriptionHandler) Usage(c echo.Context) error {
 func (h *SubscriptionHandler) Upgrade(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]any{
 		"contact": map[string]string{
-			"type":     "telegram",
-			"username": "@fastlearn_support",
-			"url":      "https://t.me/fastlearn_support",
+			"type":  "whatsapp",
+			"phone": "+7 747 925 50 91",
+			"url":   "https://wa.me/77479255091",
 		},
 		"plans": []map[string]string{
-			{"name": "Pro", "price": "$2.99/month", "videos": "30/month"},
-			{"name": "Premium", "price": "$7.99/month", "videos": "Unlimited"},
+			{"name": "Pro", "price": "1500 ₸/month", "videos": "30/month"},
+			{"name": "Premium", "price": "3900 ₸/month", "videos": "Unlimited"},
 		},
 	})
 }

@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/fastlearn/backend/api/middleware"
+	"github.com/fastlearn/backend/config"
 	"github.com/fastlearn/backend/models"
 	"github.com/fastlearn/backend/services"
 	"github.com/fastlearn/backend/utils"
@@ -12,10 +13,11 @@ import (
 
 type AuthHandler struct {
 	svc *services.AuthService
+	cfg *config.Config
 }
 
-func NewAuthHandler(svc *services.AuthService) *AuthHandler {
-	return &AuthHandler{svc: svc}
+func NewAuthHandler(svc *services.AuthService, cfg *config.Config) *AuthHandler {
+	return &AuthHandler{svc: svc, cfg: cfg}
 }
 
 func (h *AuthHandler) Register(c echo.Context) error {
@@ -72,7 +74,15 @@ func (h *AuthHandler) Me(c echo.Context) error {
 	if err != nil {
 		return utils.NotFound(c, "user not found")
 	}
-	return c.JSON(http.StatusOK, user)
+	return c.JSON(http.StatusOK, map[string]any{
+		"id":             user.ID,
+		"email":          user.Email,
+		"name":           user.Name,
+		"oauth_provider": user.OAuthProvider,
+		"created_at":     user.CreatedAt,
+		"updated_at":     user.UpdatedAt,
+		"is_admin":       h.cfg.IsAdminEmail(user.Email),
+	})
 }
 
 func (h *AuthHandler) Logout(c echo.Context) error {

@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 type Config struct {
@@ -42,6 +43,9 @@ type Config struct {
 	FastAPIURL    string
 	UploadsDir    string
 	MigrationsDir string
+
+	// AdminEmails lists users allowed to access the /admin API (manual plan grants).
+	AdminEmails []string
 }
 
 func Load() *Config {
@@ -80,7 +84,35 @@ func Load() *Config {
 		FastAPIURL:    getEnv("FASTAPI_URL", "http://localhost:8001"),
 		UploadsDir:    getEnv("UPLOADS_DIR", "./uploads/video"),
 		MigrationsDir: getEnv("MIGRATIONS_DIR", "./db/migrations"),
+
+		AdminEmails: parseEmailList(os.Getenv("ADMIN_EMAILS")),
 	}
+}
+
+// IsAdminEmail reports whether the given email is listed in ADMIN_EMAILS.
+func (c *Config) IsAdminEmail(email string) bool {
+	email = strings.ToLower(strings.TrimSpace(email))
+	for _, e := range c.AdminEmails {
+		if e == email {
+			return true
+		}
+	}
+	return false
+}
+
+func parseEmailList(raw string) []string {
+	if raw == "" {
+		return nil
+	}
+	parts := strings.Split(raw, ",")
+	emails := make([]string, 0, len(parts))
+	for _, p := range parts {
+		p = strings.ToLower(strings.TrimSpace(p))
+		if p != "" {
+			emails = append(emails, p)
+		}
+	}
+	return emails
 }
 
 // DatabaseURL assembles the postgres DSN from individual parts.

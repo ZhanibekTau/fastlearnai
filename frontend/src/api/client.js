@@ -91,4 +91,9 @@ export const subscriptionAPI = {
   getUpgradeInfo: () => api.get('/subscriptions/upgrade'),
 }
 
+export const adminAPI = {
+  searchUsers: (email) => api.get('/admin/users', { params: { email } }),
+  grantPlan:   (userId, plan, months) => api.post(`/admin/users/${userId}/subscription`, { plan, months }),
+}
+
 export default api

@@ -34,3 +34,21 @@ func GetUserID(c echo.Context) string {
 	id, _ := c.Get(UserIDKey).(string)
 	return id
 }
+
+func GetUserEmail(c echo.Context) string {
+	email, _ := c.Get(UserEmailKey).(string)
+	return email
+}
+
+// AdminOnly must run after JWTAuth. It rejects any authenticated user whose
+// email is not in cfg.AdminEmails.
+func AdminOnly(cfg *config.Config) echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			if !cfg.IsAdminEmail(GetUserEmail(c)) {
+				return utils.Forbidden(c, "admin access required")
+			}
+			return next(c)
+		}
+	}
+}
