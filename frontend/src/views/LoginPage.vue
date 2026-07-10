@@ -15,7 +15,18 @@
           <input v-model="form.email" type="email" class="input" :placeholder="t('login.emailPlaceholder')" required />
         </div>
         <div>
-          <label class="text-sm font-medium block mb-1">{{ t('common.password') }}</label>
+          <div class="flex items-center justify-between mb-1">
+            <label class="text-sm font-medium">{{ t('common.password') }}</label>
+            <button
+              v-if="!isRegister"
+              type="button"
+              class="text-xs text-primary-600 hover:underline"
+              @click="handleForgotPassword"
+              :disabled="forgotLoading"
+            >
+              {{ t('login.forgotPassword') }}
+            </button>
+          </div>
           <input v-model="form.password" type="password" class="input" placeholder="••••••••" required />
         </div>
 
@@ -42,6 +53,7 @@ import { useI18n } from 'vue-i18n'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/composables/useToast'
+import { authAPI } from '@/api/client'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -53,6 +65,7 @@ const isRegister = computed(() => route.name === 'register')
 const form = ref({ name: '', email: '', password: '' })
 const loading = ref(false)
 const error = ref('')
+const forgotLoading = ref(false)
 
 async function submit() {
   loading.value = true
@@ -74,6 +87,22 @@ async function submit() {
     }
   } finally {
     loading.value = false
+  }
+}
+
+async function handleForgotPassword() {
+  if (!form.value.email) {
+    error.value = t('login.forgotPasswordNeedEmail')
+    return
+  }
+  forgotLoading.value = true
+  try {
+    await authAPI.forgotPassword(form.value.email)
+    toast.success(t('login.forgotPasswordSent'))
+  } catch (err) {
+    toast.error(err?.message || t('login.errorGeneric'))
+  } finally {
+    forgotLoading.value = false
   }
 }
 </script>

@@ -77,7 +77,10 @@
     "haveAccount": "Already have an account?",
     "toastAccountCreated": "Account created! Welcome to FastLearn.",
     "toastServerError": "Server error — please try again later.",
-    "errorGeneric": "Something went wrong"
+    "errorGeneric": "Something went wrong",
+    "forgotPassword": "Forgot password?",
+    "forgotPasswordNeedEmail": "Enter your email first",
+    "forgotPasswordSent": "If this email is registered, we've sent a new password to it."
   },
   "pricing": {
     "title": "Simple Pricing",

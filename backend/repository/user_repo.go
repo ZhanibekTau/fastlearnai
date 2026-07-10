@@ -27,6 +27,7 @@ type UserRepository interface {
 	FindByID(ctx context.Context, id string) (*models.User, error)
 	Create(ctx context.Context, input CreateUserInput) (*models.User, error)
 	SearchByEmail(ctx context.Context, query string) ([]models.User, error)
+	UpdatePasswordHash(ctx context.Context, userID, passwordHash string) error
 }
 
 type pgUserRepo struct{ db *pgxpool.Pool }
@@ -88,6 +89,14 @@ func (r *pgUserRepo) SearchByEmail(ctx context.Context, query string) ([]models.
 		users = append(users, u)
 	}
 	return users, rows.Err()
+}
+
+func (r *pgUserRepo) UpdatePasswordHash(ctx context.Context, userID, passwordHash string) error {
+	_, err := r.db.Exec(ctx,
+		`UPDATE users SET password_hash=$1, updated_at=now() WHERE id=$2`,
+		passwordHash, userID,
+	)
+	return err
 }
 
 func (r *pgUserRepo) Create(ctx context.Context, input CreateUserInput) (*models.User, error) {

@@ -77,7 +77,10 @@
     "haveAccount": "Аккаунтыңыз бар ма?",
     "toastAccountCreated": "Аккаунт жасалды! FastLearn-ге қош келдіңіз.",
     "toastServerError": "Сервер қатесі — кейінірек қайталап көріңіз.",
-    "errorGeneric": "Бірдеңе дұрыс болмады"
+    "errorGeneric": "Бірдеңе дұрыс болмады",
+    "forgotPassword": "Құпия сөзді ұмыттыңыз ба?",
+    "forgotPasswordNeedEmail": "Алдымен email енгізіңіз",
+    "forgotPasswordSent": "Егер бұл email тіркелген болса, оған жаңа құпия сөз жіберілді."
   },
   "pricing": {
     "title": "Қарапайым тарифтер",

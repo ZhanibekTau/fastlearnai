@@ -54,6 +54,9 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       FASTAPI_URL: http://fastapi:8001
       FRONTEND_URL: ${FRONTEND_URL}
+      ADMIN_EMAILS: ${ADMIN_EMAILS}
+      EMAIL_LOGIN: ${EMAIL_LOGIN}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
     depends_on:
       postgres:
         condition: service_healthy

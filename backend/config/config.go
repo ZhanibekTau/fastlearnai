@@ -39,6 +39,11 @@ type Config struct {
 	SendGridKey    string
 	SendGridFrom   string
 
+	// EmailLogin/EmailPassword are Gmail SMTP credentials used to send
+	// generated passwords for the "forgot password" flow.
+	EmailLogin    string
+	EmailPassword string
+
 	FrontendURL   string
 	FastAPIURL    string
 	UploadsDir    string
@@ -79,6 +84,9 @@ func Load() *Config {
 
 		SendGridKey:  os.Getenv("SENDGRID_API_KEY"),
 		SendGridFrom: getEnv("SENDGRID_FROM", "noreply@fastlearn.ai"),
+
+		EmailLogin:    os.Getenv("EMAIL_LOGIN"),
+		EmailPassword: os.Getenv("EMAIL_PASSWORD"),
 
 		FrontendURL:   getEnv("FRONTEND_URL", "http://localhost:5173"),
 		FastAPIURL:    getEnv("FASTAPI_URL", "http://localhost:8001"),

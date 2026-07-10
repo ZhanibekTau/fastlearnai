@@ -38,9 +38,10 @@ func NewRouter(
 
 	// ── Auth (public) ────────────────────────────────────────────
 	auth := v1.Group("/auth")
-	auth.POST("/register", authH.Register) // → returns access_token + refresh_token
-	auth.POST("/login", authH.Login)       // → returns access_token + refresh_token
-	auth.POST("/refresh", authH.Refresh)   // → new token pair via refresh_token
+	auth.POST("/register", authH.Register)              // → returns access_token + refresh_token
+	auth.POST("/login", authH.Login)                    // → returns access_token + refresh_token
+	auth.POST("/refresh", authH.Refresh)                // → new token pair via refresh_token
+	auth.POST("/forgot-password", authH.ForgotPassword) // → generates + emails a new password
 
 	// ── Auth (protected) ─────────────────────────────────────────
 	authP := v1.Group("/auth", mw.JWTAuth(cfg))

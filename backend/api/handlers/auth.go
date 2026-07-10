@@ -85,6 +85,20 @@ func (h *AuthHandler) Me(c echo.Context) error {
 	})
 }
 
+func (h *AuthHandler) ForgotPassword(c echo.Context) error {
+	var req models.ForgotPasswordRequest
+	if err := c.Bind(&req); err != nil || req.Email == "" {
+		return utils.BadRequest(c, "email is required")
+	}
+
+	if err := h.svc.ForgotPassword(c.Request().Context(), req.Email); err != nil {
+		return utils.InternalError(c)
+	}
+	return c.JSON(http.StatusOK, map[string]string{
+		"message": "If this email is registered, a new password has been sent",
+	})
+}
+
 func (h *AuthHandler) Logout(c echo.Context) error {
 	// Stateless JWT: client drops the token. Server-side blacklist is Phase 2.
 	return c.JSON(http.StatusOK, map[string]string{"message": "logged out"})

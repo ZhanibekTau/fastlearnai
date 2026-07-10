@@ -77,7 +77,10 @@
     "haveAccount": "Уже есть аккаунт?",
     "toastAccountCreated": "Аккаунт создан! Добро пожаловать в FastLearn.",
     "toastServerError": "Ошибка сервера — попробуйте позже.",
-    "errorGeneric": "Что-то пошло не так"
+    "errorGeneric": "Что-то пошло не так",
+    "forgotPassword": "Забыли пароль?",
+    "forgotPasswordNeedEmail": "Сначала введите email",
+    "forgotPasswordSent": "Если такой email зарегистрирован, на него отправлен новый пароль."
   },
   "pricing": {
     "title": "Простые тарифы",

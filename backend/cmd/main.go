@@ -58,7 +58,8 @@ func main() {
 	procRepo := repository.NewProcessingRepo(cfg.FastAPIURL)
 
 	// ── Services ──────────────────────────────────────────────────
-	authSvc := services.NewAuthService(userRepo, subRepo, cfg)
+	emailSvc := services.NewEmailService(cfg.EmailLogin, cfg.EmailPassword)
+	authSvc := services.NewAuthService(userRepo, subRepo, emailSvc, cfg)
 	videoSvc := services.NewVideoService(videoRepo, summaryRepo, subRepo, rdb, cfg)
 	subSvc := services.NewSubscriptionService(subRepo, cfg)
 
