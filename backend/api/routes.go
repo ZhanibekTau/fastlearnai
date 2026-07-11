@@ -67,6 +67,7 @@ func NewRouter(
 	p.GET("/videos/:id", videoH.Get)
 	p.DELETE("/videos/:id", videoH.Delete)
 	p.POST("/videos/:id/regenerate", videoH.Regenerate)
+	p.GET("/videos/:id/download", videoH.Download)
 
 	// Subscriptions
 	p.GET("/subscriptions/me", subH.Mine)

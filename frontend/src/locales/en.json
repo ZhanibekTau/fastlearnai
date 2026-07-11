@@ -65,7 +65,6 @@
     "questionPrefix": "Q:",
     "answerPrefix": "A:",
     "downloadPdf": "Download PDF",
-    "downloadMarkdown": "Download Markdown",
     "copyLink": "Copy Public Link"
   },
   "login": {

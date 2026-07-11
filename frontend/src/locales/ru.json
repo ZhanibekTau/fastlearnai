@@ -65,7 +65,6 @@
     "questionPrefix": "В:",
     "answerPrefix": "О:",
     "downloadPdf": "Скачать PDF",
-    "downloadMarkdown": "Скачать Markdown",
     "copyLink": "Скопировать публичную ссылку"
   },
   "login": {

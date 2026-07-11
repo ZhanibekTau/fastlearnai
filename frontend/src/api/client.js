@@ -55,6 +55,7 @@ api.interceptors.response.use(
 function networkMessage(error) {
   if (!error.response) return 'Network error — check your connection'
   const s = error.response.status
+  if (s === 402) return 'This feature requires a paid plan'
   if (s === 403) return 'Access denied'
   if (s === 404) return 'Not found'
   if (s === 429) return 'Too many requests — slow down'
@@ -83,6 +84,8 @@ export const videoAPI = {
   status:     (id)       => api.get(`/videos/${id}`),
   regenerate: (id)       => api.post(`/videos/${id}/regenerate`),
   getPublic:  (id)       => api.get(`/videos/${id}/public`),
+  download:   (id, format = 'pdf') =>
+    api.get(`/videos/${id}/download`, { params: { format }, responseType: 'blob' }),
 }
 
 export const subscriptionAPI = {

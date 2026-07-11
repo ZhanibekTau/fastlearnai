@@ -102,6 +102,37 @@ func (h *VideoHandler) Regenerate(c echo.Context) error {
 	return c.JSON(http.StatusAccepted, map[string]string{"message": "regeneration queued"})
 }
 
+func (h *VideoHandler) Download(c echo.Context) error {
+	userID := middleware.GetUserID(c)
+	format := c.QueryParam("format")
+	if format == "" {
+		format = "pdf"
+	}
+
+	data, filename, err := h.svc.Download(c.Request().Context(), c.Param("id"), userID, format)
+	if err != nil {
+		switch err {
+		case services.ErrNotFound:
+			return utils.NotFound(c, "video not found")
+		case services.ErrUnsupportedFormat:
+			return utils.BadRequest(c, "unsupported export format")
+		case services.ErrUpgradeRequired:
+			return c.JSON(http.StatusPaymentRequired, map[string]any{
+				"message": "PDF export is available on Pro and Premium plans",
+				"upgrade": map[string]string{
+					"type": "whatsapp",
+					"url":  "https://wa.me/77479255091",
+				},
+			})
+		default:
+			return utils.InternalError(c)
+		}
+	}
+
+	c.Response().Header().Set(echo.HeaderContentDisposition, `attachment; filename="`+filename+`"`)
+	return c.Blob(http.StatusOK, "application/pdf", data)
+}
+
 func (h *VideoHandler) GetPublic(c echo.Context) error {
 	video, err := h.svc.GetPublic(c.Request().Context(), c.Param("id"))
 	if err != nil {

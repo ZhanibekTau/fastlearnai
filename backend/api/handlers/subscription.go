@@ -22,17 +22,17 @@ func (h *SubscriptionHandler) Plans(c echo.Context) error {
 		{
 			"id": "free", "name": "Free", "price": 0,
 			"videos_month": 3, "max_duration_min": 30,
-			"features": []string{"HTML export", "7-day history"},
+			"features": []string{},
 		},
 		{
 			"id": "pro", "name": "Pro", "price": 1500,
 			"videos_month": 30, "max_duration_min": 180,
-			"features": []string{"PDF + Markdown", "Q&A generation", "30-day history"},
+			"features": []string{"PDF export"},
 		},
 		{
 			"id": "premium", "name": "Premium", "price": 3900,
 			"videos_month": -1, "max_duration_min": -1,
-			"features": []string{"Unlimited", "API access", "JSON export", "Lifetime history"},
+			"features": []string{"PDF export"},
 		},
 	})
 }

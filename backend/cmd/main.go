@@ -70,7 +70,7 @@ func main() {
 	adminH := handlers.NewAdminHandler(authSvc, subSvc)
 
 	// ── Background worker ─────────────────────────────────────────
-	processor := queue.NewProcessor(videoRepo, summaryRepo, procRepo, rdb, cfg)
+	processor := queue.NewProcessor(videoRepo, summaryRepo, procRepo, subRepo, rdb, cfg)
 	go processor.Start()
 
 	// ── HTTP Server ───────────────────────────────────────────────

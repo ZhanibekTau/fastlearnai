@@ -71,7 +71,16 @@ async function regenerate() {
 }
 
 async function handleDownload(format) {
-  const res = await videoAPI.download(route.params.id, format)
-  window.open(res.url, '_blank')
+  try {
+    const blob = await videoAPI.download(route.params.id, format)
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${store.currentVideo?.title || 'summary'}.${format}`
+    a.click()
+    URL.revokeObjectURL(url)
+  } catch (err) {
+    alert(err.message)
+  }
 }
 </script>

@@ -23,7 +23,7 @@
           </li>
           <li class="flex gap-2">
             <span class="text-primary-500">✓</span>
-            {{ plan.max_duration === -1 ? t('common.unlimited') : plan.max_duration + ' min' }} {{ t('pricing.maxDuration') }}
+            {{ plan.max_duration_min === -1 ? t('common.unlimited') : plan.max_duration_min + ' min' }} {{ t('pricing.maxDuration') }}
           </li>
           <li v-for="feature in plan.features" :key="feature" class="flex gap-2">
             <span class="text-primary-500">✓</span>

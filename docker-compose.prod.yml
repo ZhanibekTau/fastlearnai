@@ -70,6 +70,9 @@ services:
       - uploads:/uploads/video
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      DEEP_SEEK_API: ${DEEP_SEEK_API}
+      DEEP_SEEK_HOST: ${DEEP_SEEK_HOST}
       GCS_BUCKET: ${GCS_BUCKET}
 
   frontend:

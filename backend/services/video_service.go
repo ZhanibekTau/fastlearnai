@@ -8,6 +8,7 @@ import (
 	"mime/multipart"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/fastlearn/backend/config"
 	"github.com/fastlearn/backend/models"
@@ -17,9 +18,11 @@ import (
 )
 
 var (
-	ErrLimitReached = errors.New("monthly limit reached")
-	ErrNotFound     = errors.New("not found")
-	ErrForbidden    = errors.New("forbidden")
+	ErrLimitReached      = errors.New("monthly limit reached")
+	ErrNotFound          = errors.New("not found")
+	ErrForbidden         = errors.New("forbidden")
+	ErrUpgradeRequired   = errors.New("plan does not include this feature")
+	ErrUnsupportedFormat = errors.New("unsupported export format")
 )
 
 type UploadInput struct {
@@ -219,6 +222,63 @@ func (s *VideoService) GetPublic(ctx context.Context, id string) (*models.VideoD
 		return nil, ErrNotFound
 	}
 	return s.toDetail(ctx, v), nil
+}
+
+func (s *VideoService) Download(ctx context.Context, id, userID, format string) ([]byte, string, error) {
+	if format != "pdf" {
+		return nil, "", ErrUnsupportedFormat
+	}
+
+	plan, err := s.subs.GetPlanByUserID(ctx, userID)
+	if err != nil {
+		plan = models.PlanFree
+	}
+	if !models.PlanConfig[plan].HasPDF {
+		return nil, "", ErrUpgradeRequired
+	}
+
+	v, err := s.videos.FindByIDAndUserID(ctx, id, userID)
+	if errors.Is(err, repository.ErrNotFound) {
+		return nil, "", ErrNotFound
+	}
+	if err != nil {
+		return nil, "", err
+	}
+	if v.Status != models.StatusCompleted {
+		return nil, "", ErrNotFound
+	}
+
+	sum, err := s.summaries.FindByVideoID(ctx, id)
+	if err != nil {
+		return nil, "", err
+	}
+
+	pdfBytes, err := generateSummaryPDF(v, sum)
+	if err != nil {
+		return nil, "", err
+	}
+
+	filename := "summary.pdf"
+	if v.Title != nil && *v.Title != "" {
+		filename = sanitizeFilename(*v.Title) + ".pdf"
+	}
+	return pdfBytes, filename, nil
+}
+
+func sanitizeFilename(s string) string {
+	r := strings.Map(func(c rune) rune {
+		switch {
+		case c >= 'a' && c <= 'z', c >= 'A' && c <= 'Z', c >= '0' && c <= '9', c == '-', c == '_', c == ' ':
+			return c
+		default:
+			return '_'
+		}
+	}, s)
+	r = strings.TrimSpace(r)
+	if r == "" {
+		return "summary"
+	}
+	return r
 }
 
 func (s *VideoService) enforceLimit(ctx context.Context, userID string) error {

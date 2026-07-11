@@ -41,7 +41,6 @@
 
     <div class="flex gap-3">
       <button class="btn-secondary text-sm" @click="$emit('download', 'pdf')">{{ t('summary.downloadPdf') }}</button>
-      <button class="btn-secondary text-sm" @click="$emit('download', 'md')">{{ t('summary.downloadMarkdown') }}</button>
       <button class="btn-secondary text-sm" @click="copyLink">{{ t('summary.copyLink') }}</button>
     </div>
   </div>

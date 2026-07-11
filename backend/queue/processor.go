@@ -3,6 +3,7 @@ package queue
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log/slog"
 	"os"
 	"time"
@@ -29,6 +30,7 @@ type Processor struct {
 	videos     repository.VideoRepository
 	summaries  repository.SummaryRepository
 	processing repository.ProcessingRepository
+	subs       repository.SubscriptionRepository
 	rdb        *redis.Client
 	cfg        *config.Config
 	workers    int
@@ -38,6 +40,7 @@ func NewProcessor(
 	videos repository.VideoRepository,
 	summaries repository.SummaryRepository,
 	processing repository.ProcessingRepository,
+	subs repository.SubscriptionRepository,
 	rdb *redis.Client,
 	cfg *config.Config,
 ) *Processor {
@@ -45,6 +48,7 @@ func NewProcessor(
 		videos:     videos,
 		summaries:  summaries,
 		processing: processing,
+		subs:       subs,
 		rdb:        rdb,
 		cfg:        cfg,
 		workers:    4,
@@ -97,6 +101,16 @@ func (p *Processor) process(job *Job) {
 		return
 	}
 
+	if exceeded, limitMin := p.durationExceedsLimit(ctx, job.UserID, result.DurationSeconds); exceeded {
+		msg := fmt.Sprintf("video duration exceeds the %d-minute limit for your plan", limitMin)
+		slog.Warn("duration limit exceeded", "video", job.VideoID, "duration_sec", result.DurationSeconds, "limit_min", limitMin)
+		_ = p.videos.UpdateStatus(ctx, job.VideoID, models.StatusFailed, msg)
+		if job.FilePath != "" {
+			_ = os.Remove(job.FilePath)
+		}
+		return
+	}
+
 	merged, err := mergeQA(result.Content, result.QA)
 	if err != nil {
 		slog.Warn("qa merge failed, storing without qa", "error", err)
@@ -121,4 +135,21 @@ func (p *Processor) process(job *Job) {
 
 	elapsed := time.Since(start).Round(time.Second)
 	slog.Info("processing done", "video", job.VideoID, "title", result.Title, "elapsed", elapsed)
+}
+
+// durationExceedsLimit checks the video's actual duration against the plan's MaxDurationMin.
+// Duration is only known after processing (YouTube/Whisper), so this runs post-hoc rather than at upload time.
+func (p *Processor) durationExceedsLimit(ctx context.Context, userID string, durationSeconds int) (bool, int) {
+	plan, err := p.subs.GetPlanByUserID(ctx, userID)
+	if err != nil {
+		plan = models.PlanFree
+	}
+	limitMin := models.PlanConfig[plan].MaxDurationMin
+	if limitMin == -1 {
+		return false, 0
+	}
+	if durationSeconds > limitMin*60 {
+		return true, limitMin
+	}
+	return false, 0
 }
