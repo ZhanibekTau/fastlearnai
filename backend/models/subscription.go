@@ -43,7 +43,7 @@ type PlanLimits struct {
 var PlanConfig = map[Plan]PlanLimits{
 	PlanFree: {
 		MaxVideosPerMonth: 3,
-		MaxDurationMin:    30,
+		MaxDurationMin:    180,
 		HasPDF:            false,
 		HasMarkdown:       false,
 		HasQA:             false,
@@ -63,7 +63,7 @@ var PlanConfig = map[Plan]PlanLimits{
 	},
 	PlanPremium: {
 		MaxVideosPerMonth: -1, // unlimited
-		MaxDurationMin:    -1,
+		MaxDurationMin:    180,
 		HasPDF:            true,
 		HasMarkdown:       true,
 		HasQA:             true,

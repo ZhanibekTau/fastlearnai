@@ -21,7 +21,7 @@ func (h *SubscriptionHandler) Plans(c echo.Context) error {
 	return c.JSON(http.StatusOK, []map[string]any{
 		{
 			"id": "free", "name": "Free", "price": 0,
-			"videos_month": 3, "max_duration_min": 30,
+			"videos_month": 3, "max_duration_min": 180,
 			"features": []string{},
 		},
 		{
@@ -31,7 +31,7 @@ func (h *SubscriptionHandler) Plans(c echo.Context) error {
 		},
 		{
 			"id": "premium", "name": "Premium", "price": 3900,
-			"videos_month": -1, "max_duration_min": -1,
+			"videos_month": -1, "max_duration_min": 180,
 			"features": []string{"PDF export"},
 		},
 	})
