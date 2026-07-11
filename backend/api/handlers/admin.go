@@ -47,6 +47,15 @@ func (h *AdminHandler) SearchUsers(c echo.Context) error {
 	return c.JSON(http.StatusOK, results)
 }
 
+// Stats handles GET /admin/stats
+func (h *AdminHandler) Stats(c echo.Context) error {
+	count, err := h.authSvc.CountUsers(c.Request().Context())
+	if err != nil {
+		return utils.InternalError(c)
+	}
+	return c.JSON(http.StatusOK, map[string]any{"total_users": count})
+}
+
 type grantPlanRequest struct {
 	Plan   string `json:"plan" validate:"required"`
 	Months int    `json:"months"`

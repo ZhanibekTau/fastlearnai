@@ -140,6 +140,11 @@ func (s *AuthService) SearchUsers(ctx context.Context, emailQuery string) ([]mod
 	return s.users.SearchByEmail(ctx, emailQuery)
 }
 
+// CountUsers returns the total number of registered users, for admin stats.
+func (s *AuthService) CountUsers(ctx context.Context) (int, error) {
+	return s.users.Count(ctx)
+}
+
 func (s *AuthService) buildTokenResponse(user *models.User) (*models.AuthResponse, error) {
 	access, refresh, err := utils.GenerateTokenPair(user.ID, user.Email, s.cfg.JWTSecret)
 	if err != nil {

@@ -117,6 +117,7 @@
   },
   "admin": {
     "title": "Админ-панель",
+    "totalUsers": "Зарегистрировано пользователей",
     "searchPlaceholder": "Поиск по email",
     "searchButton": "Найти",
     "noResults": "Пользователи не найдены",

@@ -117,6 +117,7 @@
   },
   "admin": {
     "title": "Админ-панель",
+    "totalUsers": "Тіркелген пайдаланушылар",
     "searchPlaceholder": "Email бойынша іздеу",
     "searchButton": "Іздеу",
     "noResults": "Пайдаланушылар табылмады",

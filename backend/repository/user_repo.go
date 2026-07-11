@@ -28,6 +28,7 @@ type UserRepository interface {
 	Create(ctx context.Context, input CreateUserInput) (*models.User, error)
 	SearchByEmail(ctx context.Context, query string) ([]models.User, error)
 	UpdatePasswordHash(ctx context.Context, userID, passwordHash string) error
+	Count(ctx context.Context) (int, error)
 }
 
 type pgUserRepo struct{ db *pgxpool.Pool }
@@ -89,6 +90,12 @@ func (r *pgUserRepo) SearchByEmail(ctx context.Context, query string) ([]models.
 		users = append(users, u)
 	}
 	return users, rows.Err()
+}
+
+func (r *pgUserRepo) Count(ctx context.Context) (int, error) {
+	var count int
+	err := r.db.QueryRow(ctx, `SELECT COUNT(*) FROM users`).Scan(&count)
+	return count, err
 }
 
 func (r *pgUserRepo) UpdatePasswordHash(ctx context.Context, userID, passwordHash string) error {

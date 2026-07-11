@@ -117,6 +117,7 @@
   },
   "admin": {
     "title": "Admin",
+    "totalUsers": "Registered users",
     "searchPlaceholder": "Search by email",
     "searchButton": "Search",
     "noResults": "No users found",

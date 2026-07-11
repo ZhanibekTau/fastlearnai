@@ -98,6 +98,7 @@ export const subscriptionAPI = {
 export const adminAPI = {
   searchUsers: (email) => api.get('/admin/users', { params: { email } }),
   grantPlan:   (userId, plan, months) => api.post(`/admin/users/${userId}/subscription`, { plan, months }),
+  getStats:    () => api.get('/admin/stats'),
 }
 
 export default api

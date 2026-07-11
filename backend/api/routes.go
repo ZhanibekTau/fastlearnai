@@ -76,6 +76,7 @@ func NewRouter(
 
 	// ── Admin (manual plan grants, gated by ADMIN_EMAILS) ─────────
 	admin := v1.Group("/admin", mw.JWTAuth(cfg), mw.AdminOnly(cfg))
+	admin.GET("/stats", adminH.Stats)
 	admin.GET("/users", adminH.SearchUsers)
 	admin.POST("/users/:id/subscription", adminH.GrantSubscription)
 

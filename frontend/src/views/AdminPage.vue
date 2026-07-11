@@ -7,6 +7,11 @@
     </div>
 
     <template v-else>
+      <div class="card mb-6">
+        <div class="text-sm text-gray-500">{{ t('admin.totalUsers') }}</div>
+        <div class="text-3xl font-bold">{{ totalUsers ?? '—' }}</div>
+      </div>
+
       <form @submit.prevent="search" class="flex gap-2 mb-6">
         <input
           v-model="query"
@@ -63,7 +68,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { adminAPI } from '@/api/client'
 import { useToast } from '@/composables/useToast'
@@ -77,10 +82,20 @@ const forms = reactive({})
 const loading = ref(false)
 const searched = ref(false)
 const denied = ref(false)
+const totalUsers = ref(null)
 
 function ensureForm(id) {
   if (!forms[id]) forms[id] = { plan: 'pro', months: 1, submitting: false }
 }
+
+onMounted(async () => {
+  try {
+    const stats = await adminAPI.getStats()
+    totalUsers.value = stats.total_users
+  } catch (err) {
+    if (err?.status === 403) denied.value = true
+  }
+})
 
 async function search() {
   if (!query.value.trim()) return
